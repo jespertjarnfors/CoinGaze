@@ -1,0 +1,179 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Using this template to populate the 'Top 4' -->
+    <template id="top-four">
+        <div class="card flex flex-col items-center">
+            <img class="crypto-logo" src="" alt="">
+            <div class="card-body">
+                <span class="flex flex-row items-end"><p class="crypto-name mt-2"></p><p class="crypto-24h ml-2">hi</p></span>
+                <p class="crypto-price"></p>
+            </div>
+        </div>
+    </template>
+
+</head>
+
+<body>
+    <div class="container">
+        <!-- Navbar start -->
+        <header class="nav-bar">
+            <nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
+                <div class="flex lg:flex-1">
+                    <p class="title">CoinGaze</p>
+                </div>
+                <div class="lg:flex lg:gap-x-12">
+                    <a href="#" class="text-lg navbar-text">Home</a>
+                    <a href="#" class="text-lg navbar-text">Market</a>
+                    <a href="#" class="text-lg navbar-text">About</a>
+                </div>
+
+                 <!-- Dropdown -->
+    <div class="lg:flex lg:flex-1 lg:justify-end">
+        <p class="text-lg navbar-text mr-3 mt-1">Currency:</p>
+        <div class="relative inline-block text-left">
+            <div>
+                <button type="button"
+                    class="inline-flex w-full justify-center gap-x-1.5 rounded-md px-3 py-2 text-sm text-white dd-button"
+                    id="menu-button" aria-expanded="true" aria-haspopup="true">
+                    USD
+                    <svg class="-mr-1 h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
+
+            <div id="menu-dropdown"
+                class="absolute right-0 z-10 mt-2 w-full origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden"
+                role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+                <div class="py-1" role="none">
+                   
+                    <a href="#" class="dropdown text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1"
+                        id="menu-item-0">USD</a>
+                    <a href="#" class=" dropdown text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1"
+                        id="menu-item-1">NZD</a>
+                    <a href="#" class="dropdown text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-2"
+                        id="menu-item-2">AUD</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Dropdown ends -->
+
+            </nav>
+            <!-- Mobile menu, show/hide based on menu open state. -->
+            <div class="lg:hidden" role="dialog" aria-modal="true"></div>
+        </header>
+        <!-- Nav bar end -->
+
+        <!-- Hero section start -->
+        <section class="hero flex flex-row justify-between">
+            <p class="hero-heading">Keep track of<br>your crypto<br>with CoinGaze.<br>
+                <span class="button-section"><button class="buttons px-6 py-2 text-sm text-white" type="button">
+                        Start
+                    </button>
+                    <button class="buttons-offcolor px-6 py-2 text-sm text-white ml-1" type="button">
+                        About
+                    </button></span>
+            </p>
+            <img id="phone" class="phone" src="/assets/Phone.png">
+        </section>
+        <!-- Hero section end -->
+
+        <!-- Top 4 crypto bar template -->
+        <div class="hero-crypto-display">
+            <span class="crypto-top-4 flex flex-row justify-between" id="crypto-top-4"></span>
+        </div>
+        </div>
+        <!-- Top 4 crypto bar ends-->
+
+        <div class="market">
+            
+        </div>
+
+
+    </div>
+
+    <script>
+
+document.addEventListener("DOMContentLoaded", function() {
+            const menuButton = document.getElementById("menu-button");
+            const dropdown = document.getElementById("menu-dropdown");
+
+            // Function to toggle Tailwind's "hidden" class on the dropdown.
+            function toggleDropdown() {
+                dropdown.classList.toggle("hidden");
+            }
+
+            menuButton.addEventListener("click", toggleDropdown);
+            // Event-listener needed for the button itself.
+        });
+
+
+async function fetchCrypto(currency) {
+
+    /* Saving the data as a local cache for 1 minute to prevent hitting the rate limit of Coingecko's API.
+     Will check if there is cached data already, and how long it's been since the last data was cached compared with currentTime. */
+    const cachedData = localStorage.getItem('cryptoData');
+    const cachedTimestamp = localStorage.getItem('cryptoTimestamp');
+    const currentTime = new Date().getTime();
+
+    if (cachedData && cachedTimestamp && (currentTime - cachedTimestamp < CACHE_EXPIRY)) {
+        // Use cached data
+        const crypto = JSON.parse(cachedData);
+        populateTopFour(crypto);
+    } else {
+        // Fetch fresh data from the API
+        const response = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&include_market_cap=true&include_24hr_change=true&order=market_cap_desc&per_page=4`);
+        const crypto = await response.json();
+
+        // Caching the data
+        localStorage.setItem('cryptoData', JSON.stringify(crypto));
+        localStorage.setItem('cryptoTimestamp', currentTime);
+
+        // Populate the data
+        populateTopFour(crypto);
+    }
+}
+
+function populateTopFour(crypto) {
+    const template = document.getElementById("top-four");
+
+    crypto.forEach(element => {
+        const clonedTemplate = document.importNode(template.content, true);
+
+        clonedTemplate.querySelector('.crypto-logo').src = element.image;
+        clonedTemplate.querySelector('.crypto-name').innerText = element.name;
+        if (element.price_change_percentage_24h < 0) {
+            clonedTemplate.querySelector('.crypto-24h').innerHTML = `${element.price_change_percentage_24h.toFixed(2)}%`;
+            clonedTemplate.querySelector('.crypto-24h').style = 'color:red;'
+            // Displaying negative data in red.
+        } else {
+            clonedTemplate.querySelector('.crypto-24h').innerHTML = `${element.price_change_percentage_24h.toFixed(2)}%`;
+            clonedTemplate.querySelector('.crypto-24h').style = 'color:#50C878;'
+            // Displaying positive data in green.
+        }
+        
+        clonedTemplate.querySelector('.crypto-price').innerText = `$${element.current_price.toFixed(2)}`;
+
+        document.querySelector('#crypto-top-4').appendChild(clonedTemplate);
+    });
+}
+
+const CACHE_EXPIRY = 60000; // Cache expiry time set to 1 minute to prevent getting rate-limited.
+
+fetchCrypto('usd');
+
+    </script>
+</body>
+
+</html>

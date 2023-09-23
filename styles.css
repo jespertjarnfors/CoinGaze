@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&family=Manrope:wght@700&family=Roboto+Mono:wght@500&display=swap');
+
+body {
+    background-image: url('/assets/Home\ Page\ -\ HIFI.svg');
+    color: white;
+}
+
+.nav-bar {
+    background-color: rgba(0,0,0,0);
+}
+
+.title {
+    font-family: 'Manrope', sans-serif;
+    font-size: 2rem;
+}
+
+.navbar-text {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 600;
+}
+
+.dd-button {
+    background-color: #6874E8!important;
+}
+
+.dropdown:hover {
+    background-color: #6874E8;
+    color: white;
+}
+
+.container {
+    margin: auto;
+    max-width: 1280px!important;
+}
+
+.hero {
+    height: auto;
+    width: 100%;
+    margin-top: 7rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.hero-heading {
+    font-family: 'Manrope', sans-serif;
+    font-size: 4.875rem;
+    line-height: normal;
+    height: auto;
+}
+
+.bitcoin-float {
+    height: 100px;
+    width: 100px;
+}
+
+.phone {
+  margin-bottom: 5rem;
+}
+
+.button-section {
+    display: inline-block;
+}
+
+.buttons {
+    background-color: #6874E8!important;
+    padding: 10px 30px;
+}
+
+.buttons-offcolor {
+    padding: 10px 30px;
+    box-shadow: 0 0 0 0,
+    inset 0 0 0 2px  #6874E8;
+}
+
+.phone {
+    width: 496px;
+    height: 438.06px; 
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.crypto-logo {
+    height: 100px;
+    width: 100px;
+}
+
+.crypto-top-4 {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.crypto-name {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+}
+
+.crypto-24h {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+}
+
+.crypto-price {
+    font-family: 'Roboto Mono', monospace;
+}
