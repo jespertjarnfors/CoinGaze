@@ -28,11 +28,11 @@
         <div class="row">
             <span class=" flex flex-row items-center border-b-solid border-b-2 border-r-2 border-l-2 p-4">
                 <span class="flex flex-row items-center table-item"> <img class="logo-small" src="">
-                    <p class="crypto-name ml-3">Bitcoin</p>
+                    <p class="crypto-name-table ml-3">Bitcoin</p>
                 </span>
-                <p class="crypto-price table-item">$26538</p>
-                <p class="crypto-24h table-item">0.20%</p>
-                <p class="crypto-mktcap table-item-short">$517357646580</p>
+                <p class="crypto-price-table table-item">$26538</p>
+                <p class="crypto-24h-table table-item">0.20%</p>
+                <p class="crypto-mktcap-table table-item-end">$517357646580</p>
             </span>
         </div>
     </template>
@@ -40,7 +40,7 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="mycontainer">
         <!-- Navbar start -->
         <header class="nav-bar">
             <nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
@@ -70,7 +70,7 @@
                                 </svg>
                             </button>
                         </div>
-
+                    <!-- Dropdown Menu -->
                         <div id="menu-dropdown"
                             class="absolute right-0 z-10 mt-2 w-full origin-top-right rounded-md bg-white shadow-lg hidden"
                             role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
@@ -87,20 +87,17 @@
                     </div>
                 </div>
                 <!-- Dropdown ends -->
-
             </nav>
-            <!-- Mobile menu, show/hide based on menu open state. -->
-            <div class="lg:hidden" role="dialog" aria-modal="true"></div>
         </header>
-        <!-- Nav bar end -->
+        <!-- Navbar end -->
 
         <!-- Hero section start -->
-        <section class="hero flex flex-row justify-between">
-            <p class="hero-heading">Keep track of<br>your crypto<br>with CoinGaze.<br>
-                <span class="button-section"><button class="buttons px-6 py-2 text-white" type="button">
+        <section class="hero flex justify-between">
+            <p class="hero-heading">Keep track of<br>your crypto <br>with CoinGaze.<br>
+                <span class="button-section"><button class="buttons text-white" type="button">
                         Start
                     </button>
-                    <button class="buttons-offcolor px-6 py-2 text-white ml-1" type="button">
+                    <button class="buttons-offcolor text-white ml-1" type="button">
                         About
                     </button></span>
             </p>
@@ -123,7 +120,7 @@
                 <p class="table-item">Coin</p>
                 <p class="table-item">Price</p>
                 <p class="table-item">24H</p>
-                <p class="table-item-short">Mkt Cap</p>
+                <p class="table-item-center">Mkt Cap</p>
             </div>
 
             <!-- Market-section template -->
@@ -233,19 +230,19 @@
 
 
                 clonedTemplate.querySelector('.logo-small').src = element.image;
-                clonedTemplate.querySelector('.crypto-name').innerText = element.name;
+                clonedTemplate.querySelector('.crypto-name-table').innerText = element.symbol.toUpperCase();
                 if (element.price_change_percentage_24h < 0) {
-                    clonedTemplate.querySelector('.crypto-24h').innerHTML = `${element.price_change_percentage_24h.toFixed(2)}%`;
-                    clonedTemplate.querySelector('.crypto-24h').style = 'color:red;'
+                    clonedTemplate.querySelector('.crypto-24h-table').innerHTML = `${element.price_change_percentage_24h.toFixed(2)}%`;
+                    clonedTemplate.querySelector('.crypto-24h-table').style = 'color:red;'
                     // Displaying negative data in red.
                 } else {
-                    clonedTemplate.querySelector('.crypto-24h').innerHTML = `${element.price_change_percentage_24h.toFixed(2)}%`;
-                    clonedTemplate.querySelector('.crypto-24h').style = 'color:#50C878;'
+                    clonedTemplate.querySelector('.crypto-24h-table').innerHTML = `${element.price_change_percentage_24h.toFixed(2)}%`;
+                    clonedTemplate.querySelector('.crypto-24h-table').style = 'color:#50C878;'
                     // Displaying positive data in green.
                 }
 
-                clonedTemplate.querySelector('.crypto-price').innerText = `$${priceFormatted}`;
-                clonedTemplate.querySelector('.crypto-mktcap').innerText = `$${mktcapFormatted}`;
+                clonedTemplate.querySelector('.crypto-price-table').innerText = `$${priceFormatted}`;
+                clonedTemplate.querySelector('.crypto-mktcap-table').innerText = `$${mktcapFormatted}`;
 
                 document.querySelector('#market-rows').appendChild(clonedTemplate);
             });
