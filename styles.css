@@ -9,15 +9,30 @@ body {
 }
 
 .nav-bar {
-  background-color: rgba(0, 0, 0, 0);
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  background-color: #21074A;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.nav-bar-content {
+  margin: auto;
+  max-width: 1280px;
 }
 
 .title {
   font-family: "Manrope", sans-serif;
-  font-size: 2rem;
+  font-size: 1.8rem;
 }
 
 .navbar-text {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-weight: 600;
+}
+
+.navbar-text-currency {
   font-family: "IBM Plex Sans", sans-serif;
   font-weight: 600;
 }
@@ -39,7 +54,7 @@ body {
 .hero {
   height: auto;
   width: 100%;
-  margin-top: 5rem;
+  margin-top: 14rem;
   padding-left: 2rem;
   padding-right: 2rem;
 }
@@ -69,6 +84,16 @@ body {
   padding: 12px 30px;
   box-shadow: 0 0 0 0, inset 0 0 0 2px #6874e8;
   font-size: 1.2rem;
+}
+
+.buttons:hover {
+  transition: all 1s ease;
+  background-color: #21074A!important;
+}
+
+.buttons-offcolor:hover {
+  transition: all 1s ease;
+  background-color: #6874e8!important;
 }
 
 .phone {
@@ -146,7 +171,7 @@ body {
   width: 40px;
 }
 
-.table-item {
+.table-item, .table-item-name, .table-item-price, .table-item-24h {
   flex: 1 1 0;
   width: 0;
 }
@@ -163,6 +188,22 @@ body {
   text-align: center;
 }
 
+.market-nav-btn {
+  background-color: #6874e8;
+  padding: 10px 20px;
+  border-radius: 50%;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-weight: 600;
+}
+
+.market-nav-btn:active {
+  background-color: white;
+}
+
+.market-nav-btn:focus {
+  background-color: white;
+}
+
 @media (max-width: 640px) {
   .title {
     font-size: 1.4rem;
@@ -174,7 +215,7 @@ body {
 
   .hero {
     flex-direction: column;
-    margin-top: 4rem;
+    margin-top: 10rem;
   }
 
   .hero-heading {
@@ -229,16 +270,43 @@ body {
   .crypto-price {
     font-size: 1rem;
   }
+
+  .market-title {
+    font-size: 1.8rem;
+  }
+  
+  .coinstack {
+    height: 45px;
+    width: 60px;
+    transform: translateY(-10px);
+  }
   
   .crypto-name-table,
   .crypto-24h-table,
   .crypto-price-table,
   .crypto-mktcap-table {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
   }
 
   .crypto-name-table {
     margin-left: 0.5rem;
+    flex: 2;
+  }
+
+  .table-item-price {
+    margin-left: 1.5rem;
+  }
+
+  .table-item-24h {
+    margin-left: 2.2rem;
+  }
+
+  .crypto-price-table {
+    margin-left: 1.5rem;
+  }
+
+  .crypto-24h-table {
+    margin-left: 2rem;
   }
 
   .logo-small {
@@ -249,7 +317,6 @@ body {
   .market-top-bar {
     font-size: 1rem;
   }
-
 
 }
 
