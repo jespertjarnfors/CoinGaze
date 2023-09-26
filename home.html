@@ -25,7 +25,7 @@
                 </div>
 
                 <!-- Dropdown -->
-                <div class="lg:flex lg:flex-1 lg:justify-end">
+                <div class="lg:flex lg:flex-1 flex lg:justify-end">
                     <p class="text-m navbar-text-currency mr-3 mt-1">Currency:</p>
                     <div class="relative inline-block text-left">
                         <div>
@@ -68,15 +68,15 @@
     <div class="mycontainer">
 
         <section class="hero flex justify-between">
-            <p class="hero-heading">Keep track of<br>your <span>crypto</span><br>with CoinGaze.<br>
-                <span class="button-section"><button class="buttons text-white" type="button">
+            <p class="hero-heading">Keep track of<br class="hiddenbreak"> your crypto<br class="hiddenbreak"> with CoinGaze.<br>
+                <span class="button-section"><a href="#market-nav-placeholder" class="buttons text-white" type="button">
                         Start
-                    </button>
+                </a>
                     <button class="buttons-offcolor text-white ml-1" type="button">
                         About
                     </button></span>
             </p>
-            <img id="phone" class="phone" src="/assets/Phone.png">
+            <img id="phone" class="phone" src="/assets/Phone.png" alt="phone">
         </section>
         <!-- Hero section end -->
 
@@ -119,7 +119,7 @@
             <!-- This template to populate the Market section. -->
             <template id="market-table">
                 <div class="row">
-                    <span class=" flex flex-row items-center border-b-solid border-b-2 border-r-2 border-l-2 p-4">
+                    <span class=" flex flex-row items-center border-b-solid border-b-2 border-r-2 border-l-2 p-2">
                         <span class="flex flex-row items-center table-item"> <img class="logo-small" src="">
                             <p class="crypto-name-table ml-3">Bitcoin</p>
                         </span>
@@ -190,13 +190,13 @@
             setTimeout(() => {
                 selectedRange = [a, b];
                 document.querySelector('#market-rows').innerHTML = "";
-                document.querySelector('#crypto-top-4').innerHTML = "";
                 /* Using the same logic as in the fetchCrypto function. Checks if there's cached data that can be used rather than making
                 another request on the API. */
                 if (cachedData && cachedTimestamp && (currentTime - cachedTimestamp < CACHE_EXPIRY)) {
                     crypto = JSON.parse(cachedData);
                     populateMarketTable(crypto, selectedRange);
                 } else {
+                    document.querySelector('#crypto-top-4').innerHTML = "";
                     fetchCrypto(selectedCurrency);
                 }
             }, 500);
@@ -255,6 +255,7 @@
                 // Somewhat tricky solution to keep the two digits but also gaining the formatting from .toLocaleString. It works, however.
 
                 clonedTemplate.querySelector('.crypto-logo').src = element.image;
+                clonedTemplate.querySelector('.crypto-logo').alt = element.name;
                 clonedTemplate.querySelector('.crypto-name').innerText = element.name;
                 if (element.price_change_percentage_24h < 0) {
                     clonedTemplate.querySelector('.crypto-24h').innerHTML = `${element.price_change_percentage_24h.toFixed(2)}%`;
@@ -302,6 +303,7 @@
 
 
                 clonedTemplate.querySelector('.logo-small').src = element.image;
+                clonedTemplate.querySelector('.logo-small').alt = element.symbol;
                 clonedTemplate.querySelector('.crypto-name-table').innerText = element.symbol.toUpperCase();
                 if (element.price_change_percentage_24h < 0) {
                     clonedTemplate.querySelector('.crypto-24h-table').innerHTML = `${element.price_change_percentage_24h.toFixed(2)}%`;
