@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&family=Manrope:wght@700&family=Roboto+Mono:wght@500&display=swap");
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-image: url("/assets/Home\ Page\ -\ HIFI.svg");
   background-repeat: no-repeat;
@@ -138,8 +142,13 @@ body {
   font-size: 1.3rem;
 }
 
-.market {
-  margin-top: 20rem;
+.market-nav-placeholder {
+  margin-top: 12rem;
+  height: 1px;
+}
+
+.market-section {
+  margin-top: 5rem;
   padding-left: 2rem;
   padding-right: 2rem;
 }
@@ -190,7 +199,7 @@ body {
 
 .market-nav-btn {
   background-color: #6874e8;
-  padding: 10px 20px;
+  padding: 8px 16px;
   border-radius: 50%;
   font-family: "IBM Plex Sans", sans-serif;
   font-weight: 600;

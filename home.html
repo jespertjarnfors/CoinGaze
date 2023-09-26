@@ -20,7 +20,7 @@
                 </div>
                 <div class="lg:flex lg:gap-x-12">
                     <a href="#" class="text-m navbar-text">Home</a>
-                    <a href="#" class="text-m navbar-text">Market</a>
+                    <a href="#market-nav-placeholder" class="text-m navbar-text">Market</a>
                     <a href="#" class="text-m navbar-text">About</a>
                 </div>
 
@@ -100,10 +100,14 @@
         </div>
         <!-- Top 4 crypto bar ends-->
 
+        <!-- Only used for Navigation purposes -->
+        <div id="market-nav-placeholder" class="market-nav-placeholder"></div>
+        
+
         <!-- Market section -->
-        <div class="market">
+        <div id="market-section" class="market-section">
             <span id="market-top-bar" class="flex flex-row items-center">
-                <p class="market-title mb-3">Market Insight</p><img class="coinstack ml-5" src="/assets/coinstack.png">
+                <p class="market-title mb-3">Market Insights</p><img id="coinstack" class="coinstack ml-5" src="/assets/coinstack.png">
             </span>
             <div class="market-top-bar text-xl flex flex-row">
                 <p class="table-item-name">Coin</p>
@@ -132,11 +136,11 @@
 
             <!-- Market navigation buttons -->
             <div class="market-navigation flex justify-center gap-5 text-lg mb-5">
-                <a href="#market-top-bar" class="market-nav-btn" onclick="marketPageNumber(0,10)">1</a>
-                <a href="#market-top-bar" class="market-nav-btn" onclick="marketPageNumber(10,20)">2</a>
-                <a href="#market-top-bar" class="market-nav-btn" onclick="marketPageNumber(20,30)">3</a>
-                <a href="#market-top-bar" class="market-nav-btn" onclick="marketPageNumber(30,40)">4</a>
-                <a href="#market-top-bar" class="market-nav-btn" onclick="marketPageNumber(40,50)">5</a>
+                <a href="#market-nav-placeholder" class="market-nav-btn" onclick="marketPageNumber(0,10)">1</a>
+                <a href="#market-nav-placeholder" class="market-nav-btn" onclick="marketPageNumber(10,20)">2</a>
+                <a href="#market-nav-placeholder" class="market-nav-btn" onclick="marketPageNumber(20,30)">3</a>
+                <a href="#market-nav-placeholder" class="market-nav-btn" onclick="marketPageNumber(30,40)">4</a>
+                <a href="#market-nav-placeholder" class="market-nav-btn" onclick="marketPageNumber(40,50)">5</a>
             </div>
 
         </div>
@@ -148,20 +152,25 @@
 
         document.addEventListener("DOMContentLoaded", function () {
             const menuButton = document.getElementById("menu-button");
+            const usdButton = document.getElementById("usd");
+            const nzdButton = document.getElementById("nzd");
+            const audButton = document.getElementById("aud");
             const dropdown = document.getElementById("menu-dropdown");
 
-            // Function to toggle Tailwind's "hidden" class on the dropdown.
+            // Function to toggle Tailwind's "hidden" class on all the dropdown elements in the Navigation bar.
             function toggleDropdown() {
                 dropdown.classList.toggle("hidden");
             }
             menuButton.addEventListener("click", toggleDropdown);
-            // Event-listener needed for the button itself.
+            usdButton.addEventListener("click", toggleDropdown);
+            nzdButton.addEventListener("click", toggleDropdown);
+            audButton.addEventListener("click", toggleDropdown);
+            // Event-listener needed for the buttons to toggle it.
         });
 
         let selectedCurrency = 'USD'; // Sets the current currency.
 
         // Button-click function for the Currency dropdown.
-
         function currencyChanger(currency) {
             selectedCurrency = currency; // Set the selected currency
             document.getElementById('menu-button-text').innerText = currency;
@@ -171,36 +180,48 @@
             fetchCrypto(selectedCurrency); // Fetch data with the new Currency
         }
 
-        // Display function for the Market-section pages.
+     
 
-        let selectedRange = [0, 10];
+        let selectedRange = [0, 10]; // Default value of the range for the Market page (1-10 on page 1)
 
+   // Display function for the Market-section pages.
         function marketPageNumber(a, b) {
 
             setTimeout(() => {
                 selectedRange = [a, b];
                 document.querySelector('#market-rows').innerHTML = "";
-                fetchCrypto(selectedCurrency);
-                populateMarketTable(crypto, selectedRange)
+                document.querySelector('#crypto-top-4').innerHTML = "";
+                /* Using the same logic as in the fetchCrypto function. Checks if there's cached data that can be used rather than making
+                another request on the API. */
+                if (cachedData && cachedTimestamp && (currentTime - cachedTimestamp < CACHE_EXPIRY)) {
+                    crypto = JSON.parse(cachedData);
+                    populateMarketTable(crypto, selectedRange);
+                } else {
+                    fetchCrypto(selectedCurrency);
+                }
             }, 500);
         }
 
         let crypto;
+        let cachedData;
+        let cachedTimestamp;
+        let currentTime;
+        // Declaring global variables needed for the Cache to work.
 
         async function fetchCrypto(selectedCurrency) {
 
             /* Saving the data as a local cache for 20 seconds to prevent hitting the rate limit of Coingecko's API.
              Will check if there is cached data already, and how long it's been since the last data was cached compared with currentTime. */
-            const cachedData = localStorage.getItem('cryptoData');
-            const cachedTimestamp = localStorage.getItem('cryptoTimestamp');
-            const currentTime = new Date().getTime();
+            cachedData = localStorage.getItem('cryptoData');
+            cachedTimestamp = localStorage.getItem('cryptoTimestamp');
+            currentTime = new Date().getTime();
 
 
             if (cachedData && cachedTimestamp && (currentTime - cachedTimestamp < CACHE_EXPIRY)) {
                 // Use cached data
                 crypto = JSON.parse(cachedData);
                 populateTopFour(crypto);
-                populateMarketTable(crypto,selectedRange);
+                populateMarketTable(crypto, selectedRange);
             } else {
                 // Fetch fresh data from the API
                 const response = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${selectedCurrency}&include_market_cap=true&include_24hr_change=true&order=market_cap_desc&per_page=50`);
@@ -212,7 +233,7 @@
 
                 // Populate the data
                 populateTopFour(crypto);
-                populateMarketTable(crypto,selectedRange);
+                populateMarketTable(crypto, selectedRange);
                 return crypto;
             }
         }
@@ -250,9 +271,9 @@
             });
         }
 
-        // Function to format big numbers into a smaller one with a suffix. Needed for market cap etc.
-
+        // Function to format big numbers into a smaller one with a suffix. Needed for market cap values.
         function formatBigNumber(mktCap) {
+
             const numberMktCap = Number(mktCap);
 
             if (numberMktCap >= 1.0e9) {
@@ -265,7 +286,6 @@
         }
 
         // Function to populate the Market-section.
-
         function populateMarketTable(crypto, selectedRange) {
 
             crypto = crypto.slice(selectedRange[0], selectedRange[1]);
@@ -300,12 +320,11 @@
             });
         }
 
-        const CACHE_EXPIRY = 20000; // Cache expiry time set to 20 seconds to prevent getting rate-limited.
+        const CACHE_EXPIRY = 20000; // Cache expiry time set to 20 seconds to prevent hitting the rate limit.
 
         setTimeout(() => {
-            fetchCrypto(selectedCurrency);
+            fetchCrypto(selectedCurrency); // Using a time-out to prevent hitting the rate limit.
         }, 500);
-
 
     </script>
 </body>
