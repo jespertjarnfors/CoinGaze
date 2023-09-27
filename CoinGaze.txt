@@ -1,18 +1,20 @@
+Link to Figma: https://www.figma.com/file/ZuJjlVRtVrvrVDyrbTj15A/CoinGaze?type=design&node-id=0%3A1&mode=design&t=9Ul12vHEfEDYDKBm-1
+
 CoinGaze - User Requirements
 
 1. User Access:
-   - Users can access the CoinGaze website instantly without requiring any mandatory registration or login.
+   - Users can access the CoinGaze website instantly without requiring any form of login.
 
 2. Navigation:
    - Navigation within the website is intuitive and user-friendly.
    - Users can navigate through the website using either the top navigation bar or by simply scrolling through the pages.
 
 3. Native Currency Selection:
-   - Users have the flexibility to choose their preferred native currency from a drop-down menu located in the top navigation bar. Supported currencies include USD, NZD, and AUD.
+   - Users can choose their preferred native currency from a drop-down menu located in the top navigation bar. Supported currencies include USD, NZD, and AUD.
 
 4. Home Page:
    - The home page serves as an introduction to the CoinGaze app.
-   - It prominently displays real-time data for the top 4 cryptocurrencies, including:
+   - It displays real-time data for the top 4 cryptocurrencies, including:
      - Cryptocurrency name.
      - Live price in the selected native currency.
      - 24-hour change in price (percentage change).
@@ -20,10 +22,10 @@ CoinGaze - User Requirements
 
 5. Market Section (Second Page):
    - The second page of the app is dedicated to the "Market" section.
-   - It features a table listing the top 10 cryptocurrencies by market capitalization.
+   - It features a table listing the top 50 cryptocurrencies by market capitalization.
    - For each cryptocurrency in the table, the following information is displayed:
      - Cryptocurrency name.
      - Live price in the selected native currency.
      - 24-hour change in price (percentage change).
      - Market capitalization.
-   - Users have the ability to navigate through a total of 5 pages, each displaying the top 10 cryptocurrencies, allowing access to information on the top 50 cryptocurrencies in total.
+   - Users have the ability to navigate through a total of 5 pages, each displaying 10 out of the top 50 cryptocurrencies.
