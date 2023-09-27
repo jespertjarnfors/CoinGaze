@@ -11,6 +11,7 @@
 </head>
 
 <body>
+
     <!-- Navbar start -->
     <header class="header-main">
         <nav class="nav-bar" aria-label="Global">
@@ -34,7 +35,7 @@
                 <div class="lg:flex lg:gap-x-12">
                     <a href="#" class="text-m navbar-text">Home</a>
                     <a href="#market-nav-placeholder" class="text-m navbar-text">Market</a>
-                    <a href="#" class="text-m navbar-text">Learn</a>
+                    <a href="https://www.forbes.com/advisor/investing/cryptocurrency/" target="_blank" class="text-m navbar-text">Learn</a>
                 </div>
 
                 <!-- Dropdown -->
@@ -87,7 +88,7 @@
         <ul class="mobile-nav-items">
             <li><a class="mobile-link" href="#">Home</a></li>
             <li><a class="mobile-link" href="#market-nav-placeholder">Market</a></li>
-            <li><a class="mobile-link" href="#">Learn</a></li>
+            <li><a class="mobile-link" href="https://www.forbes.com/advisor/investing/cryptocurrency/" target="_blank">Learn</a></li>
         </ul>
     </div>
 
@@ -100,9 +101,9 @@
                 <span class="button-section"><a href="#market-nav-placeholder" class="buttons text-white" type="button">
                         Start
                     </a>
-                    <button class="buttons-offcolor text-white ml-1" type="button">
-                        About
-                    </button></span>
+                    <a href="https://www.forbes.com/advisor/investing/cryptocurrency/" target="_blank" class="buttons-offcolor text-white ml-1" type="button">
+                        Learn
+                    </a></span>
             </p>
             <img id="phone" class="phone" src="/assets/Phone.png" alt="phone">
         </section>
@@ -148,7 +149,7 @@
             <!-- This template to populate the Market section. -->
             <template id="market-table">
                 <div class="row">
-                    <span class=" flex flex-row items-center border-b-solid border-b-2 border-r-2 border-l-2 p-2">
+                    <span class="flex flex-row items-center border-b-solid border-b-2 border-r-2 border-l-2 p-2">
                         <span class="flex flex-row items-center table-item"> <img class="logo-small" src="">
                             <p class="crypto-name-table ml-3">Bitcoin</p>
                         </span>
@@ -264,12 +265,13 @@
             }, 500);
         }
 
+        // Declaring global variables needed for the Cache to work.
         let crypto;
         let cachedData;
         let cachedTimestamp;
         let currentTime;
-        // Declaring global variables needed for the Cache to work.
-
+        
+        /* The main function that permfors a get-request on the API and calls the two functions that populates the website. */
         async function fetchCrypto(selectedCurrency) {
 
             /* Saving the data as a local cache for 20 seconds to prevent hitting the rate limit of Coingecko's API.
@@ -301,7 +303,6 @@
         }
 
         // Function to populate the "Top 4" used in the Hero section.
-
         function populateTopFour(crypto) {
 
             crypto = crypto.slice(0, 4);
@@ -392,5 +393,4 @@
 
     </script>
 </body>
-
 </html>

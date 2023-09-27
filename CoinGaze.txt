@@ -1,26 +1,29 @@
-CoinGaze
-- Find out if you can get top 50 coins from Coingecko API
-- Charts???
-- Search Function
-- Portfolio tracker?? If you have time.
-- Currency Chooser (Drop-down) USD - NZD - AUD - EURO - GBP
-- Few pages to click through
-- Home - Market - Follow Us
+CoinGaze - User Requirements
 
-User Requirements:
-- The user will be able to access the website straight away, without needing to log in.
-- The website will be navigated by using either the top navigation bar or simply by scrolling.
-- Each user will be able to select their native currency at the top navigation bar through a drop-down menu. (USD - NZD - AUD - EURO - GBP)
-- There will be a home page with an introduction of the App and the top 4 cryptocurrencies with live price + 24-hour change
-in price displayed. This data will be requested from the Coingecko free API.
-- The second page will feature the Market section, with a list of the top 10 Cryptocurrencies, their live price, 24-hour change	
-and market cap. The user will be able to click and navigate through 5 pages of the top cryptocurrencies.
+1. User Access:
+   - Users can access the CoinGaze website instantly without requiring any mandatory registration or login.
 
-** Potential Feature **: On the third page the user will be able to use a simple portfolio builder, where the user can select different 
-cryptocurrencies, enter how much they own, and add it to their portfolio. This should update live once a minute with the value.
+2. Navigation:
+   - Navigation within the website is intuitive and user-friendly.
+   - Users can navigate through the website using either the top navigation bar or by simply scrolling through the pages.
 
-**Potential Feature 2**: The user will be able to click on 'Insights' or simply scroll down to the bottom, to a daily chart of the price
-of a select range of cryptocurrencies. This depends on API.
+3. Native Currency Selection:
+   - Users have the flexibility to choose their preferred native currency from a drop-down menu located in the top navigation bar. Supported currencies include USD, NZD, and AUD.
 
-** Potential Feature 3**: The user will be able to click on each Cryptocurrency in the Markets section and read more about that selected
-currency.
+4. Home Page:
+   - The home page serves as an introduction to the CoinGaze app.
+   - It prominently displays real-time data for the top 4 cryptocurrencies, including:
+     - Cryptocurrency name.
+     - Live price in the selected native currency.
+     - 24-hour change in price (percentage change).
+   - This data is retrieved from the Coingecko free API, ensuring up-to-date information for users.
+
+5. Market Section (Second Page):
+   - The second page of the app is dedicated to the "Market" section.
+   - It features a table listing the top 10 cryptocurrencies by market capitalization.
+   - For each cryptocurrency in the table, the following information is displayed:
+     - Cryptocurrency name.
+     - Live price in the selected native currency.
+     - 24-hour change in price (percentage change).
+     - Market capitalization.
+   - Users have the ability to navigate through a total of 5 pages, each displaying the top 10 cryptocurrencies, allowing access to information on the top 50 cryptocurrencies in total.
