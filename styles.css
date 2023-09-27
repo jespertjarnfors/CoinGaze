@@ -30,7 +30,7 @@ body {
 
 .nav-bar-content {
   margin: auto;
-  max-width: 1280px;
+  max-width: 1150px;
 }
 
 .title {
@@ -91,13 +91,13 @@ a:hover {
 
 .mycontainer {
   margin: auto;
-  max-width: 1280px;
+  max-width: 1150px;
 }
 
 .hero {
-  height: 450px;
+  height: 420px;
   width: 100%;
-  margin-top: 9rem;
+  margin-top: 10rem;
   padding-left: 2rem;
   padding-right: 2rem;
 }
@@ -105,14 +105,14 @@ a:hover {
 .hero-heading {
   font-family: "Manrope", sans-serif;
   font-weight: 600;
-  font-size: 4.875rem;
+  font-size: 4.2rem;
   line-height: normal;
   height: auto;
 }
 
 .phone {
-  width: 496px;
-  height: 438.06px;
+  width: 470px;
+  height: 410px;
   margin-bottom: 5rem;
   margin-right: 2rem;
 }
@@ -150,8 +150,8 @@ a:hover {
 }
 
 .crypto-logo {
-  height: 70px;
-  width: 70px;
+  height: 60px;
+  width: 60px;
 }
 
 .crypto-top-4 {
@@ -160,16 +160,11 @@ a:hover {
 }
 
 .crypto-name,
-.crypto-name-table {
-  font-family: "Manrope", sans-serif;
-  font-weight: 600;
-  font-size: 1.1rem;
-}
-
+.crypto-name-table,
 .crypto-24h {
   font-family: "Manrope", sans-serif;
-  font-weight: 600;
-  font-size: 1.1rem;
+  font-weight: 700;
+  font-size: 1.2rem;
 }
 
 .crypto-name-table {
@@ -210,6 +205,19 @@ a:hover {
   height: 75px;
   width: 100px;
   transform: translateY(-20px);
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce { 
+
+  0%, 100% {
+    transform: translateY(-20px);
+  }
+
+  50% {
+    transform: translateY(-40px);
+  }
+  
 }
 
 .market-top-bar {
