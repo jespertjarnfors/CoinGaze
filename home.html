@@ -16,17 +16,30 @@
         <nav class="nav-bar" aria-label="Global">
             <div class="nav-bar-content flex items-center justify-between p-2 lg:px-8">
                 <div class="flex lg:flex-1">
+
+                    <!-- Hamburger button -->
+                    <button id="menu-toggle" class="hamburger text-white p-2">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                                d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+
                     <p class="title">CoinGaze</p>
+
                 </div>
+
+
                 <div class="lg:flex lg:gap-x-12">
                     <a href="#" class="text-m navbar-text">Home</a>
                     <a href="#market-nav-placeholder" class="text-m navbar-text">Market</a>
-                    <a href="#" class="text-m navbar-text">About</a>
+                    <a href="#" class="text-m navbar-text">Learn</a>
                 </div>
 
                 <!-- Dropdown -->
                 <div class="lg:flex lg:flex-1 flex lg:justify-end">
-                    <p class="text-m navbar-text-currency mr-3 mt-1">Currency:</p>
+                    <p class="text-m navbar-text-currency mr-3">Currency:</p>
                     <div class="relative inline-block text-left">
                         <div>
                             <button type="button"
@@ -64,14 +77,29 @@
     </header>
     <!-- Navbar end -->
 
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobile-nav">
+        <svg id="close-nav" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="close-window">
+            <path d="M18 6l-12 12"></path>
+            <path d="M6 6l12 12"></path>
+        </svg>
+        <ul class="mobile-nav-items">
+            <li><a class="mobile-link" href="#">Home</a></li>
+            <li><a class="mobile-link" href="#market-nav-placeholder">Market</a></li>
+            <li><a class="mobile-link" href="#">Learn</a></li>
+        </ul>
+    </div>
+
     <!-- Hero section start -->
     <div class="mycontainer">
 
         <section class="hero flex justify-between">
-            <p class="hero-heading">Keep track of<br class="hiddenbreak"> your crypto<br class="hiddenbreak"> with CoinGaze.<br>
+            <p class="hero-heading">Keep track of<br class="hiddenbreak"> your crypto<br class="hiddenbreak"> with
+                CoinGaze.<br>
                 <span class="button-section"><a href="#market-nav-placeholder" class="buttons text-white" type="button">
                         Start
-                </a>
+                    </a>
                     <button class="buttons-offcolor text-white ml-1" type="button">
                         About
                     </button></span>
@@ -102,12 +130,13 @@
 
         <!-- Only used for Navigation purposes -->
         <div id="market-nav-placeholder" class="market-nav-placeholder"></div>
-        
+
 
         <!-- Market section -->
         <div id="market-section" class="market-section">
             <span id="market-top-bar" class="flex flex-row items-center">
-                <p class="market-title mb-3">Market Insights</p><img id="coinstack" class="coinstack ml-5" src="/assets/coinstack.png">
+                <p class="market-title mb-3">Market Insights</p><img id="coinstack" class="coinstack ml-5"
+                    src="/assets/coinstack.png">
             </span>
             <div class="market-top-bar text-xl flex flex-row">
                 <p class="table-item-name">Coin</p>
@@ -150,6 +179,42 @@
 
     <script>
 
+        /* Mobile Navigation and Hamburger-menu logic. */
+
+        let hamburgerClicked = false; // Boolean condition to toggle when the Hamburger button has been clicked.
+
+        const hamburgerMenu = document.getElementById('menu-toggle');
+        const mobileNav = document.getElementById('mobile-nav');
+        const closeNav = document.getElementById('close-nav');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        closeNav.addEventListener('click', () => {
+            mobileNav.style.left = '-100%'; // Close the navigation when the 'X' svg is pressed.
+            hamburgerClicked = false;
+        });
+
+
+        /* Looping through the links in the Mobile Navigation and applying an Event listener to each item. */
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.style.left = '-100%'; // Close the navigation when any of the navigation links are pressed.
+                hamburgerClicked = false;
+            });
+        });
+
+        // Function to open the mobile navigation
+        hamburgerMenu.addEventListener('click', () => {
+            if (hamburgerClicked) {
+                mobileNav.style.left = '-100%';
+                hamburgerClicked = false;
+            } else {
+                mobileNav.style.left = '0'; // Slide the navigation out
+                hamburgerClicked = true;
+            }
+        });
+
+
+        // Function to toggle Tailwind's "hidden" class on all the dropdown elements in the Navigation bar.
         document.addEventListener("DOMContentLoaded", function () {
             const menuButton = document.getElementById("menu-button");
             const usdButton = document.getElementById("usd");
@@ -157,7 +222,6 @@
             const audButton = document.getElementById("aud");
             const dropdown = document.getElementById("menu-dropdown");
 
-            // Function to toggle Tailwind's "hidden" class on all the dropdown elements in the Navigation bar.
             function toggleDropdown() {
                 dropdown.classList.toggle("hidden");
             }
@@ -180,11 +244,9 @@
             fetchCrypto(selectedCurrency); // Fetch data with the new Currency
         }
 
-     
-
         let selectedRange = [0, 10]; // Default value of the range for the Market page (1-10 on page 1)
 
-   // Display function for the Market-section pages.
+        // Display function for the Market-section pages.
         function marketPageNumber(a, b) {
 
             setTimeout(() => {

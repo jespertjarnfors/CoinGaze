@@ -21,6 +21,13 @@ body {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 
+.hamburger {
+  background-color: #6874e8;
+  border-radius: 10px;
+  margin-right: 0.5rem;
+  display: none; 
+}
+
 .nav-bar-content {
   margin: auto;
   max-width: 1280px;
@@ -39,6 +46,37 @@ body {
 .navbar-text-currency {
   font-family: "IBM Plex Sans", sans-serif;
   font-weight: 600;
+  margin-top: 6px;
+}
+
+.mobile-nav {
+  display:none; /* Remains hidden until max-width 640px media query. */
+  position: fixed;
+  top: 51px;
+  left: -100%;  /* Initially hidden in Mobile Display. */
+  width: 100%;
+  height: 100%;
+  background-color: #21074a;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  font-size: 2rem;
+  line-height: 1.8;
+  align-items: center;
+  font-family: "IBM Plex Sans", sans-serif;
+  transition: left 0.3s ease;
+}
+
+a:hover {
+  color: #6874e8;
+}
+
+.close-window {
+  position: absolute;
+  fill: white;
+  cursor: pointer;
+  top: 3rem;
+  right: 3rem;
 }
 
 .dd-button {
@@ -364,6 +402,14 @@ body {
     display: none;
   }
 
+  .hamburger {
+    display: block;
+  }
+
+  .mobile-nav {
+    display: flex;
+  }
+
   .hero {
     flex-direction: column;
     margin-top: 10rem;
@@ -379,6 +425,10 @@ body {
   .mycontainer {
     margin: auto;
     max-width: 500px;
+  }
+
+  .nav-bar-content {
+    max-width: 450px;
   }
 
   .phone {
@@ -486,6 +536,10 @@ body {
       margin-bottom: 3rem;
       margin-left: auto;
       margin-right: auto;
+    }
+
+    a:hover {
+      color: #6874e8;
     }
 
     .crypto-name,
